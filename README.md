@@ -2,7 +2,7 @@
 
 exercises for digitale spiele lecture
 
-repo set up for unity development using github, git lfs & unity 2021.3.26f1
+repo set up for unity development using windows, github, git lfs & unity 2021.3.26f1
 
 ## additional setup
 
