@@ -4,3 +4,7 @@
 - https://docs.unity3d.com/ScriptReference/GameObject-tag.html
 - https://docs.unity3d.com/ScriptReference/Collider.OnCollisionEnter.html
 - https://docs.unity3d.com/ScriptReference/Rigidbody-velocity.html
+- https://unity.com/de/unity/features/editor/art-and-design/cinemachine
+- https://docs.unity3d.com/ScriptReference/Vector3.Angle.html
+- https://answers.unity.com/questions/140273/how-to-get-current-camera-coordinates-in-a-script.html
+- https://answers.unity.com/questions/46770/rotate-a-vector3-direction.html
