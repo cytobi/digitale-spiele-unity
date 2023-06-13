@@ -28,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
         m_Movement.Set(horizontal, 0f, vertical);
         m_Movement.Normalize ();
 
+        float camera_angle = Camera.main.transform.rotation.eulerAngles.y;
+        m_Movement = Quaternion.Euler(0, camera_angle, 0) * m_Movement;
+        m_Movement.Normalize ();
+
         bool hasHorizontalInput = !Mathf.Approximately (horizontal, 0f);
         bool hasVerticalInput = !Mathf.Approximately (vertical, 0f);
         bool isWalking = hasHorizontalInput || hasVerticalInput;
