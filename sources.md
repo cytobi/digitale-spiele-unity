@@ -8,3 +8,4 @@
 - https://docs.unity3d.com/ScriptReference/Vector3.Angle.html
 - https://answers.unity.com/questions/140273/how-to-get-current-camera-coordinates-in-a-script.html
 - https://answers.unity.com/questions/46770/rotate-a-vector3-direction.html
+- https://discussions.unity.com/t/how-do-i-get-some-objects-to-ignore-collision-with-a-specific-object/102308/5

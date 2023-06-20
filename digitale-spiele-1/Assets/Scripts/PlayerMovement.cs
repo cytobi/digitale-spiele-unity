@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float turnSpeed = 20f;
     public float movementSpeed = 0.1f;
     public float jumpSpeed = 2f;
+    public float horizontalSpeedFactor = 1f;
 
     Rigidbody m_Rigidbody;
     Vector3 m_Movement;
@@ -25,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         float vertical = Input.GetAxis ("Vertical");
         float jumpAxis = Input.GetAxis("Jump");
         
-        m_Movement.Set(horizontal, 0f, vertical);
+        m_Movement.Set(horizontal * horizontalSpeedFactor, 0f, vertical);
         m_Movement.Normalize ();
 
         float camera_angle = Camera.main.transform.rotation.eulerAngles.y;
