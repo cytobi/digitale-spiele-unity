@@ -53,6 +53,10 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
             //Debug.Log("grounded");
         }
+        else if(collision.gameObject.name == "Deathplane1") {
+            m_Rigidbody.position = new Vector3(0, 1, 0);
+            
+        }
     }
  
     void OnCollisionExit(Collision collision) {
