@@ -10,14 +10,17 @@ public class PlayerMovement : MonoBehaviour
     public float horizontalSpeedFactor = 1f;
 
     Rigidbody m_Rigidbody;
+    Collider m_Collider;
     Vector3 m_Movement;
     Quaternion m_Rotation = Quaternion.identity;
 
-    bool isGrounded = false;
+    float distToColliderBottom;
 
     void Start ()
     {
         m_Rigidbody = GetComponent<Rigidbody> ();
+        m_Collider = GetComponent<Collider> ();
+        distToColliderBottom = m_Collider.bounds.extents.y;
     }
 
     void FixedUpdate ()
@@ -39,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
         bool wantsToJump = !Mathf.Approximately (jumpAxis, 0f);
 
-        if (wantsToJump && isGrounded) {
+        if (wantsToJump && IsGroundedRaycast()) {
             m_Rigidbody.velocity += new Vector3(0, jumpSpeed, 0);
         }
 
@@ -50,19 +53,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        if(collision.gameObject.name == "Ground") {
-            isGrounded = true;
-            //Debug.Log("grounded");
-        }
-        else if(collision.gameObject.name == "Deathplane1") {
+        if(collision.gameObject.name == "Deathplane1") {
             m_Rigidbody.position = new Vector3(0, 1, 0);
-            
         }
     }
- 
-    void OnCollisionExit(Collision collision) {
-        if(collision.gameObject.name == "Ground") {
-            isGrounded = false;
-        }
+
+    bool IsGroundedRaycast() {
+        return Physics.Raycast(transform.position, -Vector3.up, distToColliderBottom + 0.1f);
     }
 }
