@@ -10,3 +10,4 @@
 - https://answers.unity.com/questions/46770/rotate-a-vector3-direction.html
 - https://discussions.unity.com/t/how-do-i-get-some-objects-to-ignore-collision-with-a-specific-object/102308/5
 - https://discussions.unity.com/t/how-do-i-check-if-my-rigidbody-player-is-grounded/33250/2
+- https://www.youtube.com/watch?v=fmGdDzKuJVk
