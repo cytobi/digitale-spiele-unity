@@ -11,3 +11,5 @@
 - https://discussions.unity.com/t/how-do-i-get-some-objects-to-ignore-collision-with-a-specific-object/102308/5
 - https://discussions.unity.com/t/how-do-i-check-if-my-rigidbody-player-is-grounded/33250/2
 - https://www.youtube.com/watch?v=fmGdDzKuJVk
+- https://learn.unity.com/tutorial/navigation-basics?language=en#
+- https://docs.unity3d.com/Manual/class-NavMeshObstacle.html
