@@ -14,11 +14,17 @@ public class Wander : BaseState
 
     public override void Enter() {
         base.Enter();
+
+        // set target on enter
         _sm.agent.SetDestination(_sm.myTransform.position + Random.insideUnitSphere * 30f);
+
+        // change color to green
+        _sm.myRenderer.material.color = Color.green;
     }
 
     public override void UpdateLogic() {
         base.UpdateLogic();
+
         // update target for wandering after a certain amount of time
         if (_wanderTimer > _wanderTimerMax) {
             _wanderTimer = 0;
@@ -26,6 +32,7 @@ public class Wander : BaseState
         } else {
             _wanderTimer++;
         }
+
         // if the target is close enough to the agent, change to seek state
         if (Vector3.Distance(_sm.myTransform.position, _sm.target.position) < 10f) {
             _sm.ChangeState(_sm.seekState);

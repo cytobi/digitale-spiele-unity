@@ -2213,6 +2213,7 @@ MonoBehaviour:
   target: {fileID: 460029510}
   agent: {fileID: 1818646343}
   myTransform: {fileID: 1818646342}
+  myRenderer: {fileID: 1818646340}
 --- !u!1 &2040147887
 GameObject:
   m_ObjectHideFlags: 0

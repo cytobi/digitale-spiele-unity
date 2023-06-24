@@ -38,7 +38,7 @@ public class StateMachine : MonoBehaviour
         newState.Enter();
     }
 
-    private void OnGUI()
+    protected virtual void OnGUI()
     {
         GUILayout.BeginArea(new Rect(10f, 10f, 200f, 100f));
         string content = currentState != null ? currentState.name : "(no current state)";

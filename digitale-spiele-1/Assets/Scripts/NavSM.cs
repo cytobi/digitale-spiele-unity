@@ -7,6 +7,7 @@ public class NavSM : StateMachine
     public Transform target;
     public UnityEngine.AI.NavMeshAgent agent;
     public Transform myTransform;
+    public Renderer myRenderer;
 
     [HideInInspector]
     public Hunt huntState;
@@ -25,5 +26,10 @@ public class NavSM : StateMachine
     protected override BaseState GetInitialState()
     {
         return huntState;
+    }
+
+    protected override void OnGUI()
+    {
+        // this SM doesn't need to display anything
     }
 }
