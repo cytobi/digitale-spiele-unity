@@ -13,3 +13,5 @@
 - https://www.youtube.com/watch?v=fmGdDzKuJVk
 - https://learn.unity.com/tutorial/navigation-basics?language=en#
 - https://docs.unity3d.com/Manual/class-NavMeshObstacle.html
+- https://learn.unity.com/tutorial/finite-state-machines-1#63176fc9edbc2a151b2fd5c9
+- https://www.youtube.com/watch?v=-VkezxxjsSE
