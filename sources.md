@@ -15,3 +15,10 @@
 - https://docs.unity3d.com/Manual/class-NavMeshObstacle.html
 - https://learn.unity.com/tutorial/finite-state-machines-1#63176fc9edbc2a151b2fd5c9
 - https://www.youtube.com/watch?v=-VkezxxjsSE
+- https://www.youtube.com/watch?v=-FhvQDqmgmU&list=PLwyUzJb_FNeTQwyGujWRLqnfKpV-cj-eO
+- Player Model from Destiny 2 Armor, re-rigged by https://www.mixamo.com/#/ to be compatible with their animations
+- character animations: https://www.mixamo.com/#/
+- https://www.youtube.com/watch?v=TcNgu6HuuZU
+- https://www.youtube.com/watch?v=vRKrg9Ku8Aw Flashlight
+
+
