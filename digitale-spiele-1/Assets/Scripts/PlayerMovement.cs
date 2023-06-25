@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // Animation components
+    Animator animator;
+    // prevent unnecesarry commands to animator
+    bool inJumping;
+    bool inWalking;
+
+
     public float turnSpeed = 20f;
     public float movementSpeed = 0.1f;
     public float jumpSpeed = 2f;
@@ -18,6 +25,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Start ()
     {
+        // animation copmponents
+        animator = GetComponent<Animator> ();
+        inJumping = false;
+        inWalking = false;
+
+        //physik/movement
         m_Rigidbody = GetComponent<Rigidbody> ();
         m_Collider = GetComponent<Collider> ();
         distToColliderBottom = m_Collider.bounds.extents.y;
@@ -41,8 +54,33 @@ public class PlayerMovement : MonoBehaviour
         bool isWalking = hasHorizontalInput || hasVerticalInput;
 
         bool wantsToJump = !Mathf.Approximately (jumpAxis, 0f);
+        bool isGrounded = IsGroundedRaycast();
 
-        if (wantsToJump && IsGroundedRaycast()) {
+        // animation transitions
+            // walking
+        if(!inWalking && isWalking) {
+            animator.SetBool("isWalking", true);
+            inWalking = true;
+        }
+            // stop walking
+        else if (inWalking && !isWalking) {
+            animator.SetBool("isWalking", false);
+            inWalking = false;
+        }
+            // jumping
+        if(!isGrounded && !inJumping) {
+            animator.SetBool("isJumping", true);
+            inJumping = true;
+        }
+            // landing
+        if(inJumping && isGrounded) {
+            animator.SetBool("isJumping", false);
+            inJumping = false;
+        }
+        Debug.Log(inJumping);
+        Debug.Log(inWalking);
+        
+        if (wantsToJump && isGrounded) {
             m_Rigidbody.velocity += new Vector3(0, jumpSpeed, 0);
         }
 
