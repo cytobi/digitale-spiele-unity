@@ -3044,7 +3044,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 20
   movementSpeed: 0.1
-  jumpSpeed: 1
+  jumpSpeed: 2.5
   horizontalSpeedFactor: 1
 --- !u!136 &2077852009
 CapsuleCollider:

@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         //physik/movement
         m_Rigidbody = GetComponent<Rigidbody> ();
         m_Collider = GetComponent<Collider> ();
-        distToColliderBottom = m_Collider.bounds.extents.y;
+        distToColliderBottom = m_Collider.bounds.extents.y - m_Collider.bounds.center.y;
     }
 
     void FixedUpdate ()
