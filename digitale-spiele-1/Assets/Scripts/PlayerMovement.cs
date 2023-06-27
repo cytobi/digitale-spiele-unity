@@ -77,8 +77,6 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("isJumping", false);
             inJumping = false;
         }
-        Debug.Log(inJumping);
-        Debug.Log(inWalking);
         
         if (wantsToJump && isGrounded) {
             m_Rigidbody.velocity += new Vector3(0, jumpSpeed, 0);
