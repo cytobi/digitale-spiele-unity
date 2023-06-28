@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
     // death counter
     public int deaths = 0;
+    public float deathLength = 1.0f;
+    private float lastDeath = 0.0f;
 
     void Start ()
     {
@@ -130,14 +132,26 @@ public class PlayerMovement : MonoBehaviour
     void Death() {
         deaths++;
         m_Rigidbody.position = new Vector3(0, 1, 0);
+        lastDeath = Time.realtimeSinceStartup;
     }
 
-     protected virtual void OnGUI()
+    // display Death counter (after first death)
+    protected virtual void OnGUI()
     {
+
         if(deaths == 0) return;
-        GUILayout.BeginArea(new Rect(10f, 10f, 200f, 100f));
+
+        float size = 20f; 
+        
+        // interpolate between max size and resting size
+        if(lastDeath * Time.fixedDeltaTime < deathLength) {
+            lastDeath += 1.0f;
+            size += 80f * (1 - ((lastDeath * Time.fixedDeltaTime) / deathLength));
+        }
+
+        GUILayout.BeginArea(new Rect(10f, 2.5f, 800f, 150f));
         string content = "Deaths: " + deaths;
-        GUILayout.Label($"<color='black'><size=40>{content}</size></color>");
+        GUILayout.Label($"<color='black'><size={size}>{content}</size></color>");
         GUILayout.EndArea();
     }
 }
