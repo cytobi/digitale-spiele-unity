@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -21,7 +22,18 @@ public class PlayerMovement : MonoBehaviour
     Vector3 m_Movement;
     Quaternion m_Rotation = Quaternion.identity;
 
+    // all for flashlight
+    public GameObject torch;
+    RigBuilder m_RigBuilder;
+    Rig m_Rig;
+    private bool flashActive = false; // saddly didnt find out how to adress the weight slider in Rig through code
+    private bool recentflash;
+    private float lastActivationTime = 0.0f;       //last press off the 'f' button
+
     float distToColliderBottom;
+
+    // death counter
+    public int deaths = 0;
 
     void Start ()
     {
@@ -29,6 +41,12 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator> ();
         inJumping = false;
         inWalking = false;
+
+        //flashlight components
+        m_RigBuilder = GetComponent<RigBuilder> ();
+        m_Rig = (m_RigBuilder.layers)[0].rig;
+        m_Rig.weight = 0.0f;
+        torch.active = flashActive;
 
         //physik/movement
         m_Rigidbody = GetComponent<Rigidbody> ();
@@ -38,6 +56,15 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate ()
     {
+        // timer for not activating flash multiple times on one press; 0.5 sec
+        if(Input.GetKey("f") && lastActivationTime < (Time.time - 0.5f)) {
+            flashActive = !flashActive;
+            m_Rig.weight = (flashActive == true) ? 1.0f : 0.0f;
+            torch.active = flashActive;
+            lastActivationTime = Time.time;
+        }
+
+
         float horizontal = Input.GetAxis ("Horizontal");
         float vertical = Input.GetAxis ("Vertical");
         float jumpAxis = Input.GetAxis("Jump");
@@ -90,13 +117,27 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.name == "Deathplane1") {
-            m_Rigidbody.position = new Vector3(0, 1, 0);
+            Death();
         } else if(collision.gameObject.tag == "NPC") {
-            m_Rigidbody.position = new Vector3(0, 1, 0);
+            Death();
         }
     }
 
     bool IsGroundedRaycast() {
         return Physics.Raycast(transform.position, -Vector3.up, distToColliderBottom + 0.1f);
+    }
+
+    void Death() {
+        deaths++;
+        m_Rigidbody.position = new Vector3(0, 1, 0);
+    }
+
+     protected virtual void OnGUI()
+    {
+        if(deaths == 0) return;
+        GUILayout.BeginArea(new Rect(10f, 10f, 200f, 100f));
+        string content = "Deaths: " + deaths;
+        GUILayout.Label($"<color='black'><size=40>{content}</size></color>");
+        GUILayout.EndArea();
     }
 }
