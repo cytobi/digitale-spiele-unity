@@ -15,6 +15,9 @@ public class FlockingHunt : BaseState
 
         // set target on enter
         _sm.agent.SetDestination(_sm.flockCenter());
+
+        // change color to red
+        _sm.myRenderer.material.color = Color.red;
     }
 
     public override void UpdateLogic() {

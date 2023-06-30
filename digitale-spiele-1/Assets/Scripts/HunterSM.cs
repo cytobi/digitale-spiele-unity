@@ -18,6 +18,8 @@ public class HunterSM : StateMachine
     public List<Transform> flockTransformList;
     [HideInInspector]
     public Transform myTransform;
+    [HideInInspector]
+    public Renderer myRenderer;
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class HunterSM : StateMachine
         }
 
         myTransform = agent.gameObject.transform;
+        myRenderer = agent.gameObject.GetComponent<Renderer>();
     }
 
     protected override BaseState GetInitialState()
@@ -37,10 +40,10 @@ public class HunterSM : StateMachine
         return wanderState;
     }
 
-    /*protected override void OnGUI()
+    protected override void OnGUI()
     {
         // this SM doesn't need to display anything
-    }*/
+    }
 
     public Vector3 flockCenter() {
         // calculate center of flock

@@ -17,6 +17,9 @@ public class RunAway : BaseState
 
         // set target on enter
         _sm.agent.SetDestination(_sm.flockCenter() + runVector());
+
+        // change color to blue
+        _sm.myRenderer.material.color = Color.blue;
     }
 
     public override void UpdateLogic() {

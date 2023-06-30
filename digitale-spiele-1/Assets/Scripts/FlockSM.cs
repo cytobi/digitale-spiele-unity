@@ -24,6 +24,8 @@ public class FlockSM : StateMachine
     public Transform myTransform;
     [HideInInspector]
     public Rigidbody myRigidbody;
+    [HideInInspector]
+    public Renderer myRenderer;
 
     private void Awake()
     {
@@ -42,6 +44,7 @@ public class FlockSM : StateMachine
 
         myTransform = agent.gameObject.transform;
         myRigidbody = agent.gameObject.GetComponent<Rigidbody>();
+        myRenderer = agent.gameObject.GetComponent<Renderer>();
     }
 
     protected override BaseState GetInitialState()
