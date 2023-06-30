@@ -59,6 +59,8 @@ public class RunAway : BaseState
     }
 
     private Vector3 weightedHunterPosition() {
+        float closestExtraWeight = 5f;
+
         Vector3 weightedHunterPosition = Vector3.zero;
         float totalWeight = 0f;
         foreach (Transform t in _sm.huntersTransformList) {
@@ -68,6 +70,8 @@ public class RunAway : BaseState
             totalWeight += weight;
         }
         weightedHunterPosition /= totalWeight;
+        weightedHunterPosition+= _sm.closestHunter().position * closestExtraWeight; // add extra weight to the closest hunter
+        weightedHunterPosition /= closestExtraWeight + 1f; // renormalize
         return weightedHunterPosition;
     }
 }
