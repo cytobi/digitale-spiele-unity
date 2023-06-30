@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         m_RigBuilder = GetComponent<RigBuilder> ();
         m_Rig = (m_RigBuilder.layers)[0].rig;
         m_Rig.weight = 0.0f;
-        torch.active = flashActive;
+        torch.SetActive(flashActive);
 
         //physik/movement
         m_Rigidbody = GetComponent<Rigidbody> ();
@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKey("f") && lastActivationTime < (Time.time - 0.5f)) {
             flashActive = !flashActive;
             m_Rig.weight = (flashActive == true) ? 1.0f : 0.0f;
-            torch.active = flashActive;
+            torch.SetActive(flashActive);
             lastActivationTime = Time.time;
         }
 
