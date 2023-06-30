@@ -20,5 +20,4 @@
 - character animations: https://www.mixamo.com/#/
 - https://www.youtube.com/watch?v=TcNgu6HuuZU
 - https://www.youtube.com/watch?v=vRKrg9Ku8Aw Flashlight
-
-
+- https://jaredamlin.medium.com/how-to-switch-between-cinemachine-cameras-in-unity-f8c3fa587990
