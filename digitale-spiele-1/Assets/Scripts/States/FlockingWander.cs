@@ -18,8 +18,8 @@ public class FlockingWander : BaseState
         // set target on enter
         _sm.agent.SetDestination(_sm.myTransform.position + Random.insideUnitSphere * 30f);
 
-        // change color to yellow
-        _sm.myRenderer.material.color = Color.yellow;
+        // change color to green
+        _sm.myRenderer.material.color = Color.green;
     }
 
     public override void UpdateLogic() {

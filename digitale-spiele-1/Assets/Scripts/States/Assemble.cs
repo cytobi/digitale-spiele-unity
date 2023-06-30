@@ -16,8 +16,8 @@ public class Assemble : BaseState
         // set target on enter
         _sm.agent.SetDestination(_sm.flockCenter());
 
-        // change color to green
-        _sm.myRenderer.material.color = Color.green;
+        // change color to cyan
+        _sm.myRenderer.material.color = Color.cyan;
     }
 
     public override void UpdateLogic() {
