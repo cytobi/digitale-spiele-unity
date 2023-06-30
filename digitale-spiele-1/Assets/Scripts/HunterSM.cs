@@ -2,54 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlockSM : StateMachine
+public class HunterSM : StateMachine
 {
-    public UnityEngine.AI.NavMeshAgent agent;
     public Transform flockTransform;
     public Transform huntersTransform;
+    public UnityEngine.AI.NavMeshAgent agent;
 
     [HideInInspector]
-    public Assemble assembleState;
+    public FlockingHunt huntState;
     [HideInInspector]
-    public RunAway runAwayState;
+    public FlockingWander wanderState;
 
     // used in states
     [HideInInspector]
     public List<Transform> flockTransformList;
     [HideInInspector]
-    public List<Transform> huntersTransformList;
-    [HideInInspector]
-    public float wantedDistance = 3f;
-    [HideInInspector]
     public Transform myTransform;
-    [HideInInspector]
-    public Rigidbody myRigidbody;
     [HideInInspector]
     public Renderer myRenderer;
 
     private void Awake()
     {
-        assembleState = new Assemble(this);
-        runAwayState = new RunAway(this);
+        huntState = new FlockingHunt(this);
+        wanderState = new FlockingWander(this);
 
         flockTransformList = new List<Transform>();
         for (int i = 0; i < flockTransform.childCount; i++) {
             flockTransformList.Add(flockTransform.GetChild(i));
         }
 
-        huntersTransformList = new List<Transform>();
-        for (int i = 0; i < huntersTransform.childCount; i++) {
-            huntersTransformList.Add(huntersTransform.GetChild(i));
-        }
-
         myTransform = agent.gameObject.transform;
-        myRigidbody = agent.gameObject.GetComponent<Rigidbody>();
         myRenderer = agent.gameObject.GetComponent<Renderer>();
     }
 
     protected override BaseState GetInitialState()
     {
-        return assembleState;
+        return wanderState;
     }
 
     protected override void OnGUI()
@@ -68,6 +56,10 @@ public class FlockSM : StateMachine
     }
 
     public Transform closestHunter() {
+        List<Transform> huntersTransformList = new List<Transform>();
+        for (int i = 0; i < huntersTransform.childCount; i++) {
+            huntersTransformList.Add(huntersTransform.GetChild(i));
+        }
         Vector3 flockCenter = this.flockCenter();
         Transform closestHunter = huntersTransformList[0];
         float closestDistance = Vector3.Distance(flockCenter, closestHunter.position);
@@ -79,9 +71,5 @@ public class FlockSM : StateMachine
             }
         }
         return closestHunter;
-    }
-
-    public float closestHunterDistance() {
-        return Vector3.Distance(myTransform.position, closestHunter().position);
     }
 }

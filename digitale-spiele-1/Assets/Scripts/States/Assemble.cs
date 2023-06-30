@@ -14,29 +14,34 @@ public class Assemble : BaseState
         base.Enter();
 
         // set target on enter
-        Vector3 center = calculateCenter(_sm.flockTransform);
-        _sm.agent.SetDestination(center);
+        _sm.agent.SetDestination(_sm.flockCenter());
+
+        // change color to cyan
+        _sm.myRenderer.material.color = Color.cyan;
     }
 
     public override void UpdateLogic() {
         base.UpdateLogic();
 
         // update target regularly
-        Vector3 center = calculateCenter(_sm.flockTransform);
-        _sm.agent.SetDestination(center);
-    }
+        _sm.agent.SetDestination(_sm.flockCenter());
 
-    private Vector3 calculateCenter(Transform flockTransform) {
-        // calculate center of flock
-        List<Transform> flockTransforms = new List<Transform>();
-        for (int i = 0; i < _sm.flockTransform.childCount; i++) {
-            flockTransforms.Add(_sm.flockTransform.GetChild(i));
+        // apply force to keep agents apart
+        float wantedDistance = _sm.wantedDistance;
+        foreach (Transform t in _sm.flockTransformList) {
+            if (t != _sm.myTransform) {
+                Vector3 direction = _sm.myTransform.position - t.position;
+                float distance = direction.magnitude;
+                if (distance < wantedDistance) {
+                    // force is proportional to distance
+                    _sm.myRigidbody.AddForce(direction.normalized * (wantedDistance - distance) * 5f);
+                }
+            }
         }
-        Vector3 center = Vector3.zero;
-        foreach (Transform t in flockTransforms) {
-            center += t.position;
+
+        // change state to run away if a hunter is close enough
+        if (_sm.closestHunterDistance() < 20f) {
+            _sm.ChangeState(_sm.runAwayState);
         }
-        center /= _sm.flockTransform.childCount;
-        return center;
     }
 }
