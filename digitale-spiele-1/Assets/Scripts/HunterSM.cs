@@ -2,31 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlockSM : StateMachine
+public class HunterSM : StateMachine
 {
-    public UnityEngine.AI.NavMeshAgent agent;
     public Transform flockTransform;
     public Transform huntersTransform;
+    public UnityEngine.AI.NavMeshAgent agent;
 
     [HideInInspector]
-    public Assemble assembleState;
+    public FlockingHunt huntState;
     [HideInInspector]
-    public RunAway runAwayState;
+    public FlockingWander wanderState;
 
     // used in states
     [HideInInspector]
     public List<Transform> flockTransformList;
     [HideInInspector]
-    public float wantedDistance = 3f;
-    [HideInInspector]
     public Transform myTransform;
-    [HideInInspector]
-    public Rigidbody myRigidbody;
 
     private void Awake()
     {
-        assembleState = new Assemble(this);
-        runAwayState = new RunAway(this);
+        huntState = new FlockingHunt(this);
+        wanderState = new FlockingWander(this);
 
         flockTransformList = new List<Transform>();
         for (int i = 0; i < flockTransform.childCount; i++) {
@@ -34,18 +30,17 @@ public class FlockSM : StateMachine
         }
 
         myTransform = agent.gameObject.transform;
-        myRigidbody = agent.gameObject.GetComponent<Rigidbody>();
     }
 
     protected override BaseState GetInitialState()
     {
-        return assembleState;
+        return wanderState;
     }
 
-    protected override void OnGUI()
+    /*protected override void OnGUI()
     {
         // this SM doesn't need to display anything
-    }
+    }*/
 
     public Vector3 flockCenter() {
         // calculate center of flock
@@ -73,9 +68,5 @@ public class FlockSM : StateMachine
             }
         }
         return closestHunter;
-    }
-
-    public float closestHunterDistance() {
-        return Vector3.Distance(flockCenter(), closestHunter().position);
     }
 }
