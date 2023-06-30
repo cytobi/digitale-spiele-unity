@@ -18,6 +18,7 @@ public class Hunt : BaseState
 
         // change color to red
         _sm.myRenderer.material.color = Color.red;
+        _sm.myLight.color = Color.red;
     }
 
     public override void UpdateLogic() {

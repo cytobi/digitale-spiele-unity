@@ -20,6 +20,7 @@ public class Wander : BaseState
 
         // change color to green
         _sm.myRenderer.material.color = Color.green;
+        _sm.myLight.color = Color.green;
     }
 
     public override void UpdateLogic() {

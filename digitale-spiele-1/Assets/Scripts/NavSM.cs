@@ -6,6 +6,7 @@ public class NavSM : StateMachine
 {
     public Transform target;
     public UnityEngine.AI.NavMeshAgent agent;
+    public Light myLight;
 
     [HideInInspector]
     public Hunt huntState;

@@ -20,6 +20,7 @@ public class Seek : BaseState
 
         // change color to yellow
         _sm.myRenderer.material.color = Color.yellow;
+        _sm.myLight.color = Color.yellow;
     }
 
     public override void UpdateLogic() {

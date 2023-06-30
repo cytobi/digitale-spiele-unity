@@ -2699,6 +2699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 2077852006}
   agent: {fileID: 1818646343}
+  myLight: {fileID: 813315005}
   myTransform: {fileID: 1818646342}
   myRenderer: {fileID: 1818646340}
 --- !u!1 &1966640106
