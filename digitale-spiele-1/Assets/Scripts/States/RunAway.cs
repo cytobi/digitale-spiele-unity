@@ -5,6 +5,8 @@ using UnityEngine;
 public class RunAway : BaseState
 {
     private FlockSM _sm;
+    private int _timer = 0;
+    private int _timerMax = 100;
 
     public RunAway (FlockSM stateMachine) : base("RunAway", stateMachine) {
         _sm = (FlockSM) stateMachine;
@@ -14,14 +16,18 @@ public class RunAway : BaseState
         base.Enter();
 
         // set target on enter
-        _sm.agent.SetDestination(_sm.flockCenter() + _sm.flockCenter() - _sm.closestHunter().position);
+        _sm.agent.SetDestination(_sm.flockCenter() + runVector());
     }
 
     public override void UpdateLogic() {
         base.UpdateLogic();
 
         // update target regularly
-        _sm.agent.SetDestination(_sm.flockCenter() + _sm.flockCenter() - _sm.closestHunter().position);
+        if (_timer > _timerMax) {
+            _sm.agent.SetDestination(_sm.flockCenter() + runVector());
+        } else {
+            _timer++;
+        }
 
         // apply force to keep agents apart
         float wantedDistance = _sm.wantedDistance;
@@ -37,8 +43,27 @@ public class RunAway : BaseState
         }
 
         // change state to assemble if no hunter is close enough
-        if (_sm.closestHunterDistance() > 10f) {
+        if (_sm.closestHunterDistance() > 18f) {
             _sm.ChangeState(_sm.assembleState);
         }
+    }
+
+    private Vector3 runVector() {
+        Vector3 runVector = _sm.flockCenter() - weightedHunterPosition();
+        runVector = runVector.normalized * 10f;
+        return runVector;
+    }
+
+    private Vector3 weightedHunterPosition() {
+        Vector3 weightedHunterPosition = Vector3.zero;
+        float totalWeight = 0f;
+        foreach (Transform t in _sm.huntersTransformList) {
+            float distance = Vector3.Distance(_sm.flockCenter(), t.position);
+            float weight = 1f / distance;
+            weightedHunterPosition += t.position * weight;
+            totalWeight += weight;
+        }
+        weightedHunterPosition /= totalWeight;
+        return weightedHunterPosition;
     }
 }

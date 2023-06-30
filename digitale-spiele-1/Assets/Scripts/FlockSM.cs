@@ -17,6 +17,8 @@ public class FlockSM : StateMachine
     [HideInInspector]
     public List<Transform> flockTransformList;
     [HideInInspector]
+    public List<Transform> huntersTransformList;
+    [HideInInspector]
     public float wantedDistance = 3f;
     [HideInInspector]
     public Transform myTransform;
@@ -31,6 +33,11 @@ public class FlockSM : StateMachine
         flockTransformList = new List<Transform>();
         for (int i = 0; i < flockTransform.childCount; i++) {
             flockTransformList.Add(flockTransform.GetChild(i));
+        }
+
+        huntersTransformList = new List<Transform>();
+        for (int i = 0; i < huntersTransform.childCount; i++) {
+            huntersTransformList.Add(huntersTransform.GetChild(i));
         }
 
         myTransform = agent.gameObject.transform;
@@ -58,10 +65,6 @@ public class FlockSM : StateMachine
     }
 
     public Transform closestHunter() {
-        List<Transform> huntersTransformList = new List<Transform>();
-        for (int i = 0; i < huntersTransform.childCount; i++) {
-            huntersTransformList.Add(huntersTransform.GetChild(i));
-        }
         Vector3 flockCenter = this.flockCenter();
         Transform closestHunter = huntersTransformList[0];
         float closestDistance = Vector3.Distance(flockCenter, closestHunter.position);

@@ -6,7 +6,7 @@ public class FlockingWander : BaseState
 {
     private HunterSM _sm;
     private int _wanderTimer = 0;
-    private int _wanderTimerMax = 500;
+    private int _wanderTimerMax = Random.Range(300, 500);
 
     public FlockingWander (HunterSM stateMachine) : base("FlockingWander", stateMachine) {
         _sm = (HunterSM) stateMachine;

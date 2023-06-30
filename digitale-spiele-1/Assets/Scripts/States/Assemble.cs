@@ -37,7 +37,7 @@ public class Assemble : BaseState
         }
 
         // change state to run away if a hunter is close enough
-        if (_sm.closestHunterDistance() < 10f) {
+        if (_sm.closestHunterDistance() < 15f) {
             _sm.ChangeState(_sm.runAwayState);
         }
     }
