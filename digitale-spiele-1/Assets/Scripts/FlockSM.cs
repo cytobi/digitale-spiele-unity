@@ -6,8 +6,6 @@ public class FlockSM : StateMachine
 {
     public UnityEngine.AI.NavMeshAgent agent;
     public Transform flockTransform;
-    public Transform myTransform; // clean up by getting these from the agent reference: agent.gameObject
-    public Rigidbody myRigidbody;
     public Transform huntersTransform;
 
     [HideInInspector]
@@ -15,11 +13,15 @@ public class FlockSM : StateMachine
     [HideInInspector]
     public RunAway runAwayState;
 
-    // used in multiple states
+    // used in states
     [HideInInspector]
     public List<Transform> flockTransformList;
     [HideInInspector]
     public float wantedDistance = 3f;
+    [HideInInspector]
+    public Transform myTransform;
+    [HideInInspector]
+    public Rigidbody myRigidbody;
 
     private void Awake()
     {
@@ -30,6 +32,9 @@ public class FlockSM : StateMachine
         for (int i = 0; i < flockTransform.childCount; i++) {
             flockTransformList.Add(flockTransform.GetChild(i));
         }
+
+        myTransform = agent.gameObject.transform;
+        myRigidbody = agent.gameObject.GetComponent<Rigidbody>();
     }
 
     protected override BaseState GetInitialState()

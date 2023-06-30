@@ -248,11 +248,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 559087804}
   flockTransform: {fileID: 2062307180}
-  myTransform: {fileID: 559087801}
-  myRigidbody: {fileID: 559087802}
   huntersTransform: {fileID: 767279552}
   flockTransformList: []
   wantedDistance: 3
+  myTransform: {fileID: 0}
+  myRigidbody: {fileID: 0}
 --- !u!195 &559087804
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -887,7 +887,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020601076}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 4.28}
+  m_LocalPosition: {x: 0.16, y: 2, z: 6.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1010,11 +1010,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 1020601082}
   flockTransform: {fileID: 2062307180}
-  myTransform: {fileID: 1020601077}
-  myRigidbody: {fileID: 1020601081}
   huntersTransform: {fileID: 767279552}
   flockTransformList: []
   wantedDistance: 3
+  myTransform: {fileID: 0}
+  myRigidbody: {fileID: 0}
 --- !u!1 &1365091515
 GameObject:
   m_ObjectHideFlags: 0
