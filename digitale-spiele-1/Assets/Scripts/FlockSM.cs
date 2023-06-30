@@ -8,17 +8,24 @@ public class FlockSM : StateMachine
     public Transform flockTransform;
     public Transform myTransform; // clean up by getting these from the agent reference: agent.gameObject
     public Rigidbody myRigidbody;
+    public Transform huntersTransform;
 
     [HideInInspector]
     public Assemble assembleState;
+    [HideInInspector]
+    public RunAway runAwayState;
 
     // used in multiple states
     [HideInInspector]
     public List<Transform> flockTransformList;
+    [HideInInspector]
+    public float wantedDistance = 3f;
 
     private void Awake()
     {
         assembleState = new Assemble(this);
+        runAwayState = new RunAway(this);
+
         flockTransformList = new List<Transform>();
         for (int i = 0; i < flockTransform.childCount; i++) {
             flockTransformList.Add(flockTransform.GetChild(i));
@@ -43,5 +50,27 @@ public class FlockSM : StateMachine
         }
         center /= flockTransform.childCount;
         return center;
+    }
+
+    public Transform closestHunter() {
+        List<Transform> huntersTransformList = new List<Transform>();
+        for (int i = 0; i < huntersTransform.childCount; i++) {
+            huntersTransformList.Add(huntersTransform.GetChild(i));
+        }
+        Vector3 flockCenter = this.flockCenter();
+        Transform closestHunter = huntersTransformList[0];
+        float closestDistance = Vector3.Distance(flockCenter, closestHunter.position);
+        foreach (Transform t in huntersTransformList) {
+            float distance = Vector3.Distance(flockCenter, t.position);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestHunter = t;
+            }
+        }
+        return closestHunter;
+    }
+
+    public float closestHunterDistance() {
+        return Vector3.Distance(flockCenter(), closestHunter().position);
     }
 }

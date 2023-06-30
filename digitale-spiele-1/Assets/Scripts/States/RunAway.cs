@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Assemble : BaseState
+public class RunAway : BaseState
 {
     private FlockSM _sm;
 
-    public Assemble (FlockSM stateMachine) : base("Assemble", stateMachine) {
+    public RunAway (FlockSM stateMachine) : base("RunAway", stateMachine) {
         _sm = (FlockSM) stateMachine;
     }
 
@@ -14,14 +14,14 @@ public class Assemble : BaseState
         base.Enter();
 
         // set target on enter
-        _sm.agent.SetDestination(_sm.flockCenter());
+        _sm.agent.SetDestination(_sm.flockCenter() + _sm.flockCenter() - _sm.closestHunter().position);
     }
 
     public override void UpdateLogic() {
         base.UpdateLogic();
 
         // update target regularly
-        _sm.agent.SetDestination(_sm.flockCenter());
+        _sm.agent.SetDestination(_sm.flockCenter() + _sm.flockCenter() - _sm.closestHunter().position);
 
         // apply force to keep agents apart
         float wantedDistance = _sm.wantedDistance;
@@ -36,9 +36,9 @@ public class Assemble : BaseState
             }
         }
 
-        // change state to run away if a hunter is close enough
-        if (_sm.closestHunterDistance() < 10f) {
-            _sm.ChangeState(_sm.runAwayState);
+        // change state to assemble if no hunter is close enough
+        if (_sm.closestHunterDistance() > 10f) {
+            _sm.ChangeState(_sm.assembleState);
         }
     }
 }
