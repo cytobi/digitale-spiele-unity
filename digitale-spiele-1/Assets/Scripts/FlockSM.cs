@@ -82,6 +82,6 @@ public class FlockSM : StateMachine
     }
 
     public float closestHunterDistance() {
-        return Vector3.Distance(flockCenter(), closestHunter().position);
+        return Vector3.Distance(myTransform.position, closestHunter().position);
     }
 }

@@ -46,7 +46,7 @@ public class RunAway : BaseState
         }
 
         // change state to assemble if no hunter is close enough
-        if (_sm.closestHunterDistance() > 18f) {
+        if (_sm.closestHunterDistance() > 25f) {
             _sm.ChangeState(_sm.assembleState);
         }
     }
