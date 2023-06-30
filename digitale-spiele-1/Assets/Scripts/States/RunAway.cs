@@ -28,6 +28,7 @@ public class RunAway : BaseState
         // update target regularly
         if (_timer > _timerMax) {
             _sm.agent.SetDestination(_sm.flockCenter() + runVector());
+            _timer = 0;
         } else {
             _timer++;
         }
