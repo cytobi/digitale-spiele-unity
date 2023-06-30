@@ -6,8 +6,6 @@ public class NavSM : StateMachine
 {
     public Transform target;
     public UnityEngine.AI.NavMeshAgent agent;
-    public Transform myTransform;
-    public Renderer myRenderer;
 
     [HideInInspector]
     public Hunt huntState;
@@ -16,11 +14,20 @@ public class NavSM : StateMachine
     [HideInInspector]
     public Seek seekState;
 
+    // used in states
+    [HideInInspector]
+    public Transform myTransform;
+    [HideInInspector]
+    public Renderer myRenderer;
+
     private void Awake()
     {
         huntState = new Hunt(this);
         wanderState = new Wander(this);
         seekState = new Seek(this);
+
+        myTransform = agent.gameObject.transform;
+        myRenderer = agent.gameObject.GetComponent<Renderer>();
     }
 
     protected override BaseState GetInitialState()
