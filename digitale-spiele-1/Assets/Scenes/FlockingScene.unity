@@ -248,6 +248,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 559087804}
   flockTransform: {fileID: 2062307180}
+  myTransform: {fileID: 559087801}
+  myRigidbody: {fileID: 559087802}
 --- !u!195 &559087804
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -711,7 +713,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.22975291, y: 0.000000016746096, z: -0.0000000039532173, w: 0.973249}
+  m_LocalRotation: {x: 0.22975291, y: -0.000000016746089, z: 0.0000000039532155, w: 0.973249}
   m_LocalPosition: {x: 0, y: 3, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -906,6 +908,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 1020601082}
   flockTransform: {fileID: 2062307180}
+  myTransform: {fileID: 1020601077}
+  myRigidbody: {fileID: 1020601081}
 --- !u!1 &1365091515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,7 +1462,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738985550}
-  m_LocalRotation: {x: 0.22975291, y: 0.000000016746096, z: -0.0000000039532173, w: 0.973249}
+  m_LocalRotation: {x: 0.22975291, y: -0.000000016746089, z: 0.0000000039532155, w: 0.973249}
   m_LocalPosition: {x: 0, y: 3, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
